@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-sand-100 text-ink font-sans antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display text-forest-900;
+  }
+  ::selection {
+    @apply bg-amber-400/40;
+  }
+  :focus-visible {
+    outline: 2px solid #145C3B;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-medium transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-forest-600 text-sand-50 hover:bg-forest-700;
+  }
+  .btn-secondary {
+    @apply btn bg-transparent text-forest-700 border border-forest-600 hover:bg-forest-50;
+  }
+  .btn-amber {
+    @apply btn bg-amber-500 text-forest-900 hover:bg-amber-600;
+  }
+  .field {
+    @apply w-full bg-sand-50 border border-sand-300 px-4 py-3 text-ink placeholder:text-ink/40 focus:border-forest-600 focus:ring-1 focus:ring-forest-600 outline-none transition-colors;
+  }
+  .field-label {
+    @apply block text-sm font-medium text-forest-800 mb-1.5;
+  }
+  .tag {
+    @apply inline-block text-xs font-medium px-2.5 py-1 tracking-wide;
+  }
+  .container-page {
+    @apply max-w-6xl mx-auto px-6 sm:px-8;
+  }
+}
