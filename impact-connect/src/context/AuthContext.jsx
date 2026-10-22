@@ -68,15 +68,14 @@ export function AuthProvider({ children }) {
     setRegistrations([])
   }, [])
 
+  // Join or leave an event (used by the "Register now" button)
   const toggleRegistration = useCallback(
     async (eventId) => {
       if (!user) return { ok: false, error: 'Please log in first.' }
       try {
         const updated = await api.toggleRegistration(eventId)
         setRegistrations((prev) =>
-          updated.isRegistered
-            ? [...new Set([...prev, eventId])]
-            : prev.filter((id) => id !== eventId)
+          updated.isRegistered ? [...new Set([...prev, eventId])] : prev.filter((id) => id !== eventId)
         )
         return { ok: true, event: updated }
       } catch (err) {
@@ -85,6 +84,28 @@ export function AuthProvider({ children }) {
     },
     [user]
   )
+
+  // DELETE: cancel a registration
+  const cancelRegistration = useCallback(async (eventId) => {
+    try {
+      await api.cancelRegistration(eventId)
+      setRegistrations((prev) => prev.filter((id) => id !== eventId))
+      return { ok: true }
+    } catch (err) {
+      return { ok: false, error: err.message }
+    }
+  }, [])
+
+  // UPDATE: move a registration from one event to another
+  const switchRegistration = useCallback(async (fromId, toId) => {
+    try {
+      await api.switchRegistration(fromId, toId)
+      setRegistrations((prev) => [...prev.filter((id) => id !== fromId), toId])
+      return { ok: true }
+    } catch (err) {
+      return { ok: false, error: err.message }
+    }
+  }, [])
 
   const value = {
     user,
@@ -95,6 +116,8 @@ export function AuthProvider({ children }) {
     login,
     logout,
     toggleRegistration,
+    cancelRegistration,
+    switchRegistration,
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

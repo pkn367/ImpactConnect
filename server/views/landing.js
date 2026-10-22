@@ -16,6 +16,8 @@ const endpoints = [
     { method: 'GET', path: '/api/events', access: 'Public', desc: 'List events with live seat counts.', try: '/api/events' },
     { method: 'GET', path: '/api/events/me/registrations', access: 'Login', desc: 'Events the current user joined.' },
     { method: 'POST', path: '/api/events/:id/register', access: 'Login', desc: 'Join or leave an event (checks capacity).' },
+    { method: 'PUT', path: '/api/events/:id/register', access: 'Login', desc: 'Switch your registration to a different event.' },
+    { method: 'DELETE', path: '/api/events/:id/register', access: 'Login', desc: 'Cancel your registration.' },
   ] },
   { group: 'System', items: [
     { method: 'GET', path: '/api/stats', access: 'Public', desc: 'Live counts using MongoDB aggregation.', try: '/api/stats' },

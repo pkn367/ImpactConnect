@@ -62,4 +62,6 @@ export const api = {
   getEvents: () => request('/events'),
   getMyRegistrations: () => request('/events/me/registrations'),
   toggleRegistration: (id) => request(`/events/${id}/register`, { method: 'POST' }),
+  cancelRegistration: (id) => request(`/events/${id}/register`, { method: 'DELETE' }),
+  switchRegistration: (id, newEventId) => request(`/events/${id}/register`, { method: 'PUT', body: { newEventId } }),
 }

@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import ExploreNGOs from './pages/ExploreNGOs'
 import NGODetail from './pages/NGODetail'
 import ManageNGO from './pages/ManageNGO'
+import ManageEvent from './pages/ManageEvent'
 import Events from './pages/Events'
 import About from './pages/About'
 import Login from './pages/Login'
@@ -29,6 +30,8 @@ export default function App() {
               <Route path="/ngos/:id/edit" element={<ProtectedRoute><ManageNGO /></ProtectedRoute>} />
               <Route path="/ngos/:id" element={<NGODetail />} />
               <Route path="/events" element={<Events />} />
+              <Route path="/events/new" element={<ProtectedRoute><ManageEvent /></ProtectedRoute>} />
+              <Route path="/events/:id/edit" element={<ProtectedRoute><ManageEvent /></ProtectedRoute>} />
               <Route path="/about" element={<About />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
