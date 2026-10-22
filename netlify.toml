@@ -1,0 +1,20 @@
+[build]
+  # Install both apps, then build the React site
+  command = "npm ci --prefix server && npm ci --prefix impact-connect && npm run build --prefix impact-connect"
+  publish = "impact-connect/dist"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "zisi"
+
+# Send API calls to the Express function
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+
+# Let React Router handle every other URL (e.g. /ngos, /dashboard)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
